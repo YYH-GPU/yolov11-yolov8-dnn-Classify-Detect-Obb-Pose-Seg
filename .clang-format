@@ -1,0 +1,67 @@
+# Generated from CLion C/C++ Code Style settings
+BasedOnStyle: Google  # 基于 Google 风格
+AccessModifierOffset: -4  # 访问控制修饰符的缩进偏移量
+AlignAfterOpenBracket: Align  # 在括号后对齐
+AlignConsecutiveAssignments: None  # 连续赋值语句不对齐
+AlignOperands: Align  # 对齐操作数
+AllowAllArgumentsOnNextLine: false  # 不允许所有参数放在下一行
+AllowAllConstructorInitializersOnNextLine: false  # 不允许所有构造函数初始化器放在下一行
+AllowAllParametersOfDeclarationOnNextLine: false  # 不允许所有声明的参数放在下一行
+AllowShortBlocksOnASingleLine: Always  # 总是允许短代码块放在单行
+AllowShortCaseLabelsOnASingleLine: false  # 不允许短的 case 标签放在单行
+AllowShortFunctionsOnASingleLine: None  # 允许所有短函数放在单行
+AllowShortIfStatementsOnASingleLine: Always  # 总是允许短的 if 语句放在单行
+AllowShortLambdasOnASingleLine: None  # 允许所有短 lambda 放在单行
+AllowShortLoopsOnASingleLine: false  # 允许短循环放在单行
+AlwaysBreakAfterReturnType: None  # 返回类型之后不换行
+AlwaysBreakTemplateDeclarations: Yes  # 模板声明总是换行
+BreakBeforeBraces: Custom  # 大括号前换行的自定义设置
+BraceWrapping:  # 大括号包裹设置
+  AfterCaseLabel: true  # case 标签后换行
+  AfterClass: true  # 类定义后换行
+  AfterControlStatement: true  # 控制语句后换行
+  AfterEnum: true  # 枚举定义后换行
+  AfterFunction: true  # 函数定义后换行
+  AfterNamespace: true  # 命名空间后换行
+  AfterUnion: true  # 联合体定义后换行
+  BeforeCatch: true  # catch 之前换行
+  BeforeElse: true  # else 之前换行
+  IndentBraces: false  # 大括号不缩进
+  SplitEmptyFunction: true  # 拆分空函数
+  SplitEmptyRecord: true  # 拆分空记录
+BreakBeforeBinaryOperators: None  # 二元操作符前不换行
+BreakBeforeTernaryOperators: true  # 三元操作符前换行
+BreakConstructorInitializers: BeforeColon  # 构造函数初始化器在冒号前换行
+BreakInheritanceList: BeforeColon  # 继承列表在冒号前换行
+ColumnLimit: 0  # 列宽限制为0（不限制）
+CompactNamespaces: false  # 不使用紧凑的命名空间
+ContinuationIndentWidth: 8  # 续行缩进宽度为8
+IndentCaseLabels: true  # 缩进 case 标签
+IndentPPDirectives: None  # 预处理指令不缩进
+IndentWidth: 4  # 缩进宽度为4
+KeepEmptyLinesAtTheStartOfBlocks: true  # 保持代码块开头的空行
+MaxEmptyLinesToKeep: 2  # 保留的最大空行数为2
+NamespaceIndentation: All  # 命名空间内全部缩进
+ObjCSpaceAfterProperty: false  # Objective-C 属性之后不加空格
+ObjCSpaceBeforeProtocolList: true  # Objective-C 协议列表之前加空格
+PointerAlignment: Right  # 指针对齐方式为右对齐
+ReflowComments: false  # 不重新排列注释
+SpaceAfterCStyleCast: true  # C 风格类型转换后加空格
+SpaceAfterLogicalNot: false  # 逻辑非操作符后不加空格
+SpaceAfterTemplateKeyword: false  # template 关键字后不加空格
+SpaceBeforeAssignmentOperators: true  # 赋值操作符前加空格
+SpaceBeforeCpp11BracedList: false  # C++11 大括号列表前不加空格
+SpaceBeforeCtorInitializerColon: true  # 构造函数初始化器冒号前加空格
+SpaceBeforeInheritanceColon: true  # 继承冒号前加空格
+SpaceBeforeParens: ControlStatements  # 控制语句的括号前加空格
+SpaceBeforeRangeBasedForLoopColon: false  # 基于范围的 for 循环冒号前不加空格
+SpaceInEmptyParentheses: false  # 空括号中不加空格
+SpacesBeforeTrailingComments: 0  # 尾随注释前的空格数为0
+SpacesInAngles: false  # 尖括号中不加空格
+SpacesInCStyleCastParentheses: false  # C 风格类型转换括号中不加空格
+SpacesInContainerLiterals: false  # 容器字面量中不加空格
+SpacesInParentheses: false  # 括号中不加空格
+SpacesInSquareBrackets: false  # 方括号中不加空格
+TabWidth: 4  # Tab 宽度为4
+UseTab: Never  # 从不使用 Tab
+

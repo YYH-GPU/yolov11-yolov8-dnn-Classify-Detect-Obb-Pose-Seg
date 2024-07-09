@@ -1,0 +1,3 @@
+/home/yyhao/yolo_dnn/cmake-build-debug/CMakeFiles/MyProject.dir
+/home/yyhao/yolo_dnn/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/yyhao/yolo_dnn/cmake-build-debug/CMakeFiles/rebuild_cache.dir
