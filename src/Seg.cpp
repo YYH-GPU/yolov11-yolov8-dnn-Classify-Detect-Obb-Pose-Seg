@@ -123,15 +123,26 @@ void Seg::detect_Seg(const cv::Mat &frame, std::vector<YOLO_OUT_SEG> &yoloOut)
     cv::dnn::blobFromImage(frame, blob, 1 / 255.0, cv::Size(640, 640), cv::Scalar(0, 0, 0), true, false);
     net.setInput(blob);
     std::vector<cv::Mat> outs;
+    auto start = std::chrono::high_resolution_clock::now();
     net.forward(outs, net.getUnconnectedOutLayersNames());
+
+    // 获取结束时间点
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // 计算运行时间，单位为毫秒
+    std::chrono::duration<double, std::milli> duration = end - start;
+
+    // 输出运行时间
+    std::cout << "代码运行时间: " << duration.count() << " 毫秒" << std::endl; 
 
     std::vector<cv::Rect> bboxes;
     std::vector<float> scores;
     std::vector<int> classes;
     std::vector<std::vector<float>> seg_w;
     int img_w = frame.size[1];// Use width
-    for (int i = 1; i < 4; i++)
+    for (int i = 1; i < outs.size(); i++)
     {
+//        std::cout << outs[i].size << std::endl;
         yolov8_Seg_process(outs[i], img_w, bboxes, scores, classes, seg_w);
     }
 

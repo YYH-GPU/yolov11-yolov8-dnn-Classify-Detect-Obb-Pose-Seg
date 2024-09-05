@@ -89,6 +89,7 @@ void Detect::yolov8_process(cv::Mat& out, int img_w, std::vector<cv::Rect>& bbox
     int gridX = out.size[2];
     int gridY = gridX;
 
+//    std::cout << "out_size" << out.size << std::endl;
     auto* data = (float*) out.data;
 
     for (int shiftY = 0; shiftY < gridY; shiftY++)
@@ -152,10 +153,6 @@ void Detect::detect(const cv::Mat& frame, std::vector<YOLO_OUT>& yoloOut)
     net.setInput(blob);
     std::vector<cv::Mat> outs;
     net.forward(outs, net.getUnconnectedOutLayersNames());
-    for(int i = 0; i < outs.size();  i++)
-    {
-        std::cout << outs[i].size << std::endl;
-    }
 
     std::vector<cv::Rect> bboxes;
     std::vector<float> scores;
@@ -194,4 +191,7 @@ void Detect::draw(cv::Mat& image, const std::vector<YOLO_OUT> yolo_Out)
         thickness = 2;
         cv::putText(image, text, textOrg, cv::FONT_HERSHEY_SIMPLEX, fontScale, random_color(out.classId), thickness, 8, false);
     }
+}
+Detect::~Detect()
+{
 }

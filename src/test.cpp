@@ -111,12 +111,15 @@ void test_Detect::runTest()
 
 void test_Detect::runCameraTest()
 {
-    cv::VideoCapture cap(0);// 打开默认摄像头
+    cv::VideoCapture cap(0); // 打开默认摄像头
     if (!cap.isOpened())
     {
         std::cerr << "Error: Could not open camera." << std::endl;
         return;
     }
+
+    auto start = std::chrono::high_resolution_clock::now();
+    model_input_size = cv::Size(640, 640);
 
     while (true)
     {
@@ -131,11 +134,26 @@ void test_Detect::runCameraTest()
 
         org_Size = frame.size();
         cv::Mat out_frame = letterbox(frame, 640, 640, cv::Scalar(114, 114, 114));
+
+        // Detect objects
         detect(out_frame, yoloOut);
+
+        // Draw detected objects
         draw(frame, yoloOut);
+
+        // Calculate and display FPS
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diff = end - start;
+        double fps = 1.0 / diff.count();
+        start = end;
+
+        // Display FPS on the frame
+        std::string fps_text = "FPS: " + std::to_string(fps).substr(0, 3);
+        cv::putText(frame, fps_text, cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0), 2);
+
         cv::imshow("Camera Detection Result", frame);
 
-        if (cv::waitKey(1) >= 0)// 按下任意键退出
+        if (cv::waitKey(1) >= 0) // 按下任意键退出
         {
             break;
         }
@@ -176,12 +194,16 @@ void test_Pose::runTest()
 
 void test_Pose::runCameraTest()
 {
-    cv::VideoCapture cap(0);// 打开默认摄像头
+    cv::VideoCapture cap(0); // 打开默认摄像头
     if (!cap.isOpened())
     {
         std::cerr << "Error: Could not open camera." << std::endl;
         return;
     }
+
+    auto start = std::chrono::high_resolution_clock::now();
+    int frame_count = 0;
+    double fps = 0.0;
 
     while (true)
     {
@@ -198,9 +220,26 @@ void test_Pose::runCameraTest()
         cv::Mat out_frame = letterbox(frame, 640, 640, cv::Scalar(144, 144, 144));
         detect_Pose(out_frame, yoloOut);
         draw_Pose(frame, yoloOut);
+
+        // Calculate and display FPS
+        frame_count++;
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diff = end - start;
+
+        if (diff.count() >= 1.0)
+        {
+            fps = frame_count / diff.count();
+            start = end;
+            frame_count = 0;
+        }
+
+        // Display FPS on the frame
+        std::string fps_text = "FPS: " + std::to_string(fps).substr(0, 3);
+        cv::putText(frame, fps_text, cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0), 2);
+
         cv::imshow("Camera Pose Detection Result", frame);
 
-        if (cv::waitKey(1) >= 0)// 按下任意键退出
+        if (cv::waitKey(1) >= 0) // 按下任意键退出
         {
             break;
         }
@@ -209,6 +248,7 @@ void test_Pose::runCameraTest()
     cap.release();
     cv::destroyAllWindows();
 }
+
 
 test_Seg::test_Seg(const std::string& modelPath, const std::string& imagePath)
     : TEST(imagePath), Seg(modelPath)
@@ -246,12 +286,14 @@ void test_Seg::runTest()
 
 void test_Seg::runCameraTest()
 {
-    cv::VideoCapture cap(0);// 打开默认摄像头
+    cv::VideoCapture cap(0); // 打开默认摄像头
     if (!cap.isOpened())
     {
         std::cerr << "Error: Could not open camera." << std::endl;
         return;
     }
+
+    auto start = std::chrono::high_resolution_clock::now();
 
     while (true)
     {
@@ -275,8 +317,18 @@ void test_Seg::runCameraTest()
         // Draw segmentation
         draw_Seg(frame, yoloOut);
 
+        // Calculate and display FPS
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diff = end - start;
+        double fps = 1.0 / diff.count();
+        start = end;
+
+        // Display FPS on the frame
+        std::string fps_text = "FPS: " + std::to_string(fps).substr(0, 3);
+        cv::putText(frame, fps_text, cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0), 2);
+
         cv::imshow("Camera Pose Detection Result", frame);
-        if (cv::waitKey(1) >= 0)// 按下任意键退出
+        if (cv::waitKey(1) >= 0) // 按下任意键退出
         {
             break;
         }
@@ -285,6 +337,7 @@ void test_Seg::runCameraTest()
     cap.release();
     cv::destroyAllWindows();
 }
+
 
 test_Obb::test_Obb(const std::string& modelPath, const std::string& imagePath)
     : TEST(imagePath), Obb(modelPath)

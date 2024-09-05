@@ -96,7 +96,17 @@ void Pose::detect_Pose(const cv::Mat &frame, std::vector<YOLO_OUT_POSE> &yoloOut
     cv::dnn::blobFromImage(frame, blob, 1 / 255.0, cv::Size(640, 640), cv::Scalar(0, 0, 0), true, false);
     net.setInput(blob);
     std::vector<cv::Mat> outs;
+    auto start = std::chrono::high_resolution_clock::now();
     net.forward(outs, net.getUnconnectedOutLayersNames());
+
+    // 获取结束时间点
+    auto end = std::chrono::high_resolution_clock::now();
+
+    // 计算运行时间，单位为毫秒
+    std::chrono::duration<double, std::milli> duration = end - start;
+
+    // 输出运行时间
+    std::cout << "代码运行时间: " << duration.count() << " 毫秒" << std::endl;
 
     std::vector<cv::Rect> bboxes;
     std::vector<float> scores;

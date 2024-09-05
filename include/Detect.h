@@ -16,6 +16,7 @@ class Detect : public YOLO
 {
 public:
     explicit Detect(const std::string& modelPath);
+    ~Detect() override;
     void detect(const cv::Mat& frame, std::vector<YOLO_OUT>& yoloOut);
     void yolov8_process(cv::Mat& out, int img_w, std::vector<cv::Rect>& bboxes, std::vector<float>& scores,std::vector<int>& classes);
     void draw(cv::Mat& images, std::vector<YOLO_OUT> yolo_out);
